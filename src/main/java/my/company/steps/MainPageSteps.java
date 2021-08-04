@@ -2,8 +2,8 @@ package my.company.steps;
 
 
 
+import io.qameta.allure.Step;
 import my.company.pages.MainPage;
-import ru.yandex.qatools.allure.annotations.Step;
 
 /**
  * Created by Maria on 29.04.2017.
@@ -17,9 +17,9 @@ public class MainPageSteps {
         new MainPage().selectMenuItem(menuItem);
     }
 
-    @Step("выбран вид страхования {0}")
-    public void selectMenuInsurance(String menuItem){
-        new MainPage().selectInsuranceItem(menuItem);
+    @Step("открыто меню сайта")
+    public void openMenu(){
+        new MainPage().menuButton.click();
     }
 
 }

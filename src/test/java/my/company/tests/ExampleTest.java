@@ -1,11 +1,9 @@
 package my.company.tests;
 
-import my.company.steps.BaseSteps;
-import my.company.steps.DMSSteps;
-import my.company.steps.MainPageSteps;
-import my.company.steps.SendAppSteps;
+import io.qameta.allure.junit4.DisplayName;
+import my.company.steps.*;
 import org.junit.Test;
-import ru.yandex.qatools.allure.annotations.Title;
+
 
 import java.util.HashMap;
 
@@ -15,13 +13,14 @@ import java.util.HashMap;
 public class ExampleTest extends BaseSteps {
 
     MainPageSteps mainPageSteps = new MainPageSteps();
+    HealthInsuranceSteps healthInsuranceSteps = new HealthInsuranceSteps();
     DMSSteps dmsSteps = new DMSSteps();
     SendAppSteps sendAppSteps = new SendAppSteps();
 
     HashMap<String, String> testData = new HashMap<>();
 
 
-    @Title("Заявка на ДМС")
+    @DisplayName("Заявка на ДМС")
     @Test
     public void Test(){
         testData.put("Имя","Иван");
@@ -32,16 +31,18 @@ public class ExampleTest extends BaseSteps {
         testData.put("Эл. почта","teststststs");
         testData.put("Комментарии","Autotest");
 
-        mainPageSteps.selectMenuItem("Страхование");
-        mainPageSteps.selectMenuInsurance("ДМС");
-        dmsSteps.checkPageTitle("Добровольное медицинское страхование");
+        mainPageSteps.openMenu();
+        mainPageSteps.selectMenuItem("Здоровье");
+        healthInsuranceSteps.checkPageTitle("Страхование здоровья");
+        healthInsuranceSteps.goToDMSPage();
+        dmsSteps.checkPageTitle("добровольное медицинское страхование");
         dmsSteps.goToSendAppPage();
         sendAppSteps.checkPageTitle("Заявка на добровольное медицинское страхование");
 
         sendAppSteps.fillFields(testData);
 
-        testData.put("Телефон","+7 (919) 111-11-11");
+        testData.put("Телефон","+7 (919) 111-11-12");
         sendAppSteps.checkFillFields(testData);
-        sendAppSteps.checkErrorMessageField("Эл. почта", "Введите корректный email");
+        sendAppSteps.checkErrorMessageField("Эл. почта", "Введите адрес электронной почты");
     }
 }

@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 public class DMSPage extends BasePageObject{
 
 
-    @FindBy(xpath = "//*[@class='page-header']/*")
+    @FindBy(xpath = "//*[@class='content-document-header']")
     public WebElement title;
 
     @FindBy(xpath = "//*[contains(text(),'Отправить заявку')][contains(@class,'btn')]")
